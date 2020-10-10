@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/streaks",
+      "handler": "streak.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/streaks/count",
+      "handler": "streak.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/streaks/:id",
+      "handler": "streak.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/streaks",
+      "handler": "streak.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/streaks/:id",
+      "handler": "streak.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/streaks/:id",
+      "handler": "streak.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

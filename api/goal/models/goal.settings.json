@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "goals",
+  "info": {
+    "name": "Goal",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "Description": {
+      "type": "richtext"
+    },
+    "users_permissions_user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "goals"
+    },
+    "posts": {
+      "via": "goals",
+      "collection": "post",
+      "dominant": true
+    }
+  }
+}

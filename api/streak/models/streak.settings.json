@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "streaks",
+  "info": {
+    "name": "Streak",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "Quantity": {
+      "type": "integer"
+    }
+  }
+}
