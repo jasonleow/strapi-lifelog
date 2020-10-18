@@ -65,6 +65,11 @@
     "posts": {
       "via": "users_permissions_user",
       "collection": "post"
+    },
+    "confirmationToken": {
+      "type": "string",
+      "configurable": false,
+      "private": true
     }
   }
 }
