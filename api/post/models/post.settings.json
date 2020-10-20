@@ -11,15 +11,15 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string",
       "required": true
     },
-    "Content": {
+    "content": {
       "type": "richtext",
       "required": true
     },
-    "Tags": {
+    "tags": {
       "type": "string",
       "unique": true
     },
@@ -35,9 +35,8 @@
     "comments": {
       "collection": "comment"
     },
-    "Slug": {
-      "type": "uid",
-      "targetField": "Title"
+    "slug": {
+      "type": "uid"
     }
   }
 }
