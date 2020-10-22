@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_seo_seos",
+  "info": {
+    "name": "SEO",
+    "icon": "laptop-code"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "meta": {
+      "type": "component",
+      "repeatable": true,
+      "component": "seo.meta"
+    }
+  }
+}
