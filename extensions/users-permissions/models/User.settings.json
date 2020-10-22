@@ -70,6 +70,10 @@
       "type": "string",
       "configurable": false,
       "private": true
+    },
+    "streak": {
+      "via": "users_permissions_user",
+      "model": "streak"
     }
   }
 }

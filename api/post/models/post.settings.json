@@ -33,7 +33,8 @@
       "via": "posts"
     },
     "comments": {
-      "collection": "comment"
+      "collection": "comment",
+      "via": "post"
     },
     "slug": {
       "type": "uid"
