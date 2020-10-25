@@ -7,7 +7,7 @@ module.exports = {
    * @return {Object}
    */
 
-  async findOne(ctx) {
+  async findSlug(ctx) {
     const { slug } = ctx.params;
 
     const entity = await strapi.services.post.findOne({ slug });
@@ -25,6 +25,6 @@ module.exports = {
       entity = await strapi.services.comment.create(ctx.request.body);
     }
     return sanitizeEntity(entity, { model: strapi.models.comment });
-  },
+  }
 
 };
