@@ -15,7 +15,7 @@
       "type": "richtext",
       "required": true
     },
-    "users_permissions_user": {
+    "author": {
       "plugin": "users-permissions",
       "model": "user",
       "via": "comments"

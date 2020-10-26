@@ -27,7 +27,7 @@
       "collection": "goal",
       "via": "posts"
     },
-    "users_permissions_user": {
+    "author": {
       "plugin": "users-permissions",
       "model": "user",
       "via": "posts"

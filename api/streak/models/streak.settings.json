@@ -14,7 +14,7 @@
     "quantity": {
       "type": "integer"
     },
-    "users_permissions_user": {
+    "author": {
       "plugin": "users-permissions",
       "model": "user",
       "via": "streak"

@@ -54,25 +54,25 @@
       "plugin": "users-permissions",
       "configurable": false
     },
-    "comments": {
-      "via": "users_permissions_user",
-      "collection": "comment"
-    },
-    "goals": {
-      "via": "users_permissions_user",
-      "collection": "goal"
-    },
-    "posts": {
-      "via": "users_permissions_user",
-      "collection": "post"
-    },
     "confirmationToken": {
       "type": "string",
       "configurable": false,
       "private": true
     },
+    "comments": {
+      "via": "author",
+      "collection": "comment"
+    },
+    "goals": {
+      "via": "author",
+      "collection": "goal"
+    },
+    "posts": {
+      "via": "author",
+      "collection": "post"
+    },
     "streak": {
-      "via": "users_permissions_user",
+      "via": "author",
       "model": "streak"
     }
   }
