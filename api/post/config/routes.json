@@ -63,6 +63,22 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/posts/custom/:custom",
+      "handler": "post.custom",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/posts/streak/:streak",
+      "handler": "post.streak",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

@@ -67,6 +67,28 @@ module.exports = {
       entity = await strapi.services.comment.create(ctx.request.body);
     }
     return sanitizeEntity(entity, { model: strapi.models.comment });
-  }
+  },
+
+  //custom query to find anything
+  async custom(ctx) {
+    const { custom } = ctx.params;
+
+    console.log(custom);
+
+    const users = await strapi.query('post').count({content_contains: 'edit'});
+    
+    return users;
+  },
+
+  //execute raw db query on posts via bookshelf instance
+  async streak(ctx) {
+    const { streak } = ctx.params;
+
+    console.log(streak);
+
+    const entity = await strapi.connections.default.raw("SELECT author, strftime('%d-%m-%Y %H:%M:%f', published_at/1000.0, 'unixepoch') FROM posts ORDER BY author DESC");
+    
+    return entity;
+  },
 
 };
