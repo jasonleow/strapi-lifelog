@@ -86,7 +86,7 @@ module.exports = {
 
     console.log(streak);
 
-    const entity = await strapi.connections.default.raw("SELECT author, strftime('%d-%m-%Y %H:%M:%f', published_at/1000.0, 'unixepoch') FROM posts ORDER BY author DESC");
+    const entity = await strapi.connections.default.raw("SELECT author, published_at FROM posts ORDER BY author DESC");
     
     return entity;
   },
