@@ -89,6 +89,6 @@ module.exports = {
     const entity = await strapi.connections.default.raw("SELECT author, published_at FROM posts ORDER BY author DESC");
     
     return entity;
-  },
+  }
 
 };
