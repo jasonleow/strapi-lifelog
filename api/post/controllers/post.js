@@ -1,4 +1,5 @@
 const { parseMultipartData, sanitizeEntity } = require('strapi-utils');
+const { summary, streakRanges, trackRecord } = require('date-streaks');
 
 module.exports = {
   /**
@@ -75,7 +76,7 @@ module.exports = {
 
     console.log(custom);
 
-    const users = await strapi.query('post').count({content_contains: 'edit'});
+    const users = await strapi.query('post').count({content_contains: 'api'});
     
     return users;
   },
@@ -86,9 +87,34 @@ module.exports = {
 
     console.log(streak);
 
-    const entity = await strapi.connections.default.raw("SELECT author, published_at FROM posts ORDER BY author DESC");
+    /*
+    // Demo example from date-streaks package
+    const dates = [
+    	 "2020-10-30T11:00:00.193Z",
+    	 "2020-10-31T13:30:09.589Z",
+    	 "2020-11-01T15:29:20.990Z"
+    ]
+
+    return summary(dates);
+    */
+
+    // raw SQL queryto get pub;ished at dates
+    const rawDates = await strapi.connections.default.raw("SELECT published_at FROM posts WHERE author='1' ORDER BY published_at ASC"); 
     
-    return entity;
+    // using map() method to extract an array of dates from the results set of the db query
+    const dates = rawDates.rows.map(row => row.published_at);
+
+    // doing this so that I can return all 3 functions at the end
+    const summaryDates = summary(dates);
+    const streakrangesDates = streakRanges(dates);
+
+    // params to get trackRecord properly
+    const length = 10;
+    const endDate = new Date('2020-11-05T15:29:20.990Z');
+    const trackrecordDates = trackRecord({ dates, length, endDate });
+
+    return { summaryDates, streakrangesDates, trackrecordDates };
+
   }
 
 };
