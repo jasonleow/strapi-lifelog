@@ -56,7 +56,7 @@ module.exports = {
     return sanitizeEntity(entity, { model: strapi.models.post });
   },
 
-  //create comment for posts
+  //create comment for posts, restrict comment to only 1 author and 1 article
   async comment(ctx) {
     let entity;
     if (ctx.is('multipart')) {
@@ -76,8 +76,8 @@ module.exports = {
 
     console.log(custom);
 
-    const users = await strapi.query('post').count({content_contains: 'api'});
-    
+    //const users = await strapi.query('post').count({content_contains: 'api'});
+    const users = await strapi.connections.default.raw("SELECT CURRENT_USER"); 
     return users;
   },
 
@@ -98,22 +98,58 @@ module.exports = {
     return summary(dates);
     */
 
-    // raw SQL queryto get pub;ished at dates
-    const rawDates = await strapi.connections.default.raw("SELECT published_at FROM posts WHERE author='1' ORDER BY published_at ASC"); 
-    
+    // raw SQL queryto get published at dates
+    const rawDates = await strapi.connections.default.raw("SELECT author, published_at FROM posts ORDER BY published_at ASC");
+    //const rawDates = await strapi.connections.default.raw("SELECT author, published_at FROM posts ORDER BY author ASC");
+    //return rawDates;
+   
     // using map() method to extract an array of dates from the results set of the db query
     const dates = rawDates.rows.map(row => row.published_at);
+    
+    // Antonio's suggestions
+    /*const dates = rawDates.rows.map(element => {
+    	return {
+    		"element.author": "element.published_at"
+    	}
+    });
+
+    return dates;*/
 
     // doing this so that I can return all 3 functions at the end
-    const summaryDates = summary(dates);
-    const streakrangesDates = streakRanges(dates);
+	  const summaryDates = summary(dates);
+	  const streakrangesDates = streakRanges(dates);
 
-    // params to get trackRecord properly
-    const length = 10;
-    const endDate = new Date('2020-11-05T15:29:20.990Z');
-    const trackrecordDates = trackRecord({ dates, length, endDate });
+	  // params to get trackRecord properly
+	  const length = 10;
+	  const endDate = new Date('2020-11-05T15:29:20.990Z');
+	  const trackrecordDates = trackRecord({ dates, length, endDate });
 
     return { summaryDates, streakrangesDates, trackrecordDates };
+			
+
+		/*/ Keenen's suggestions
+		const authors = await strapi.connections.default.raw("SELECT DISTINCT author FROM posts");
+  
+    // using map() method to extract an array of dates from the results set of the db query
+    for(author of authors.rows) {
+		 	// raw SQL query to get published_at dates
+    	const rawDates = await strapi.connections.default.raw("SELECT author, published_at FROM posts WHERE author='${author.id}' ORDER BY published_at ASC");
+		
+			const dates = rawDates.rows.map(row => row.published_at);
+		
+			// doing this so that I can return all 3 functions at the end
+    	const summaryDates = summary(dates);
+    	const streakrangesDates = streakRanges(dates);
+
+			// params to get trackRecord properly
+			const length = 10;
+			const endDate = new Date('2020-11-05T15:29:20.990Z');
+	  	const trackrecordDates = trackRecord({ dates, length, endDate });
+
+	  	author.streakData = { summaryDates, streakrangesDates, trackrecordDates };	
+	  }
+
+	  return authors;*/
 
   }
 
